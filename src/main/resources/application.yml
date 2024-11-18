@@ -1,0 +1,53 @@
+spring:
+  flyway:
+    enabled: false  # Deshabilita Flyway para que no maneje migraciones
+    url: jdbc:postgresql://localhost:5432/pasarela_pagos
+    user: postgres
+    password: 1234
+    schemas: public
+    locations: classpath:db/migration
+    placeholder-replacement: true
+    baseline-on-migrate: true
+    flyway:
+      output: info
+
+  jpa:
+    hibernate:
+      ddl-auto: none  # No se debe usar ddl-auto: create/drop/validate si se usa Flyway
+    show-sql: true  # Habilita mostrar SQL para depuración
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pasarela_pagos
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10  # Establece el tamaño máximo de la piscina de conexiones
+      minimum-idle: 5  # Establece el número mínimo de conexiones inactivas
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/mercadopago_db
+
+  # Configuración de logs para ver las peticiones y respuestas HTTP
+  logging:
+    level:
+      org.springframework.web: DEBUG  # Habilita los logs de las peticiones HTTP
+      org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG  # Habilita el logging del filtro de solicitudes
+      org.springframework.web.servlet.DispatcherServlet: DEBUG  # Logs de los controladores HTTP
+
+mercadopago:
+  access:
+    token: "APP_USR-171912093902110-091704-6e861344b2533b31d132dd973e4989f3-1995834012"
+    publicKey: "APP_USR-850d9e1f-54f2-4498-af99-1491dbe37fa7"
+    url: "https://api.mercadopago.com/checkout/preferences"
+
+server:
+  port: 8090
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
