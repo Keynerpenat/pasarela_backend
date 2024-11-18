@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 @RestController
 @RequestMapping("/api/pagos")  // Este es el prefijo para la URL
-@CrossOrigin(origins = "http://127.0.0.1:5500/")  // Asegúrate de permitir solicitudes desde tu frontend
+@CrossOrigin(origins = {"http://localhost:5500", "https://puntoc.citiogo.com"})
 public class PagoController {
 
     @Autowired
